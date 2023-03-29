@@ -3,6 +3,7 @@ package com.group.shopping.repository;
 import com.group.shopping.domain.item.Item;
 import com.group.shopping.domain.item.QItem;
 import com.group.shopping.domain.item.constant.ItemSellStatus;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -10,9 +11,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.thymeleaf.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.awt.print.Pageable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -36,6 +41,34 @@ class ItemRepositoryTest {
                     .itemDetail("테스트 상품 상세 설명" + i)
                     .itemSellStatus(ItemSellStatus.SELL)
                     .stockNumber(100)
+                    .regTime(LocalDateTime.now())
+                    .updateTime(LocalDateTime.now())
+                    .build();
+            itemRepository.save(item);
+        }
+    }
+
+    public void createItemList2() {
+        for (int i = 1; i <= 5; i ++) {
+            Item item = Item.builder()
+                    .itemNm("테스트 상품" + i)
+                    .price(10000 + i)
+                    .itemDetail("테스트 상품 상세 설명" + i)
+                    .itemSellStatus(ItemSellStatus.SELL)
+                    .stockNumber(100)
+                    .regTime(LocalDateTime.now())
+                    .updateTime(LocalDateTime.now())
+                    .build();
+            itemRepository.save(item);
+        }
+
+        for (int i = 6; i <= 10; i ++) {
+            Item item = Item.builder()
+                    .itemNm("테스트 상품" + i)
+                    .price(10000 + i)
+                    .itemDetail("테스트 상품 상세 설명" + i)
+                    .itemSellStatus(ItemSellStatus.SOLD_OUT)
+                    .stockNumber(0)
                     .regTime(LocalDateTime.now())
                     .updateTime(LocalDateTime.now())
                     .build();
@@ -120,5 +153,37 @@ class ItemRepositoryTest {
         for (Item item : itemList) {
             System.out.println(item.toString());
         }
+    }
+
+    @Test
+    @DisplayName("상품 Querydsl 조회 테스트 2")
+    public void queryDslTest2() {
+        this.createItemList2();
+
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        QItem item = QItem.item;
+
+        String itemDetail = "테스트 상품 상세 설명";
+        int price = 10003;
+        String itemSellStat = "SELL";
+
+        booleanBuilder.and(item.itemDetail.like("%" + itemDetail + "%"));
+        booleanBuilder.and(item.price.gt(price));
+
+        if (StringUtils.equals(itemSellStat, ItemSellStatus.SELL)) {
+            booleanBuilder.and(item.itemSellStatus.eq(ItemSellStatus.SELL));
+        }
+
+        PageRequest pageable = PageRequest.of(0, 5);
+        Page<Item> itemPagingResult =
+                itemRepository.findAll(booleanBuilder, pageable);
+        System.out.println("total elements : " +
+                itemPagingResult.getTotalElements());
+
+        List<Item> resultItemList = itemPagingResult.getContent();
+        for (Item resultItem : resultItemList) {
+            System.out.println(resultItem.toString());
+        }
+
     }
 }

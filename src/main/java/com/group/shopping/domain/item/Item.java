@@ -1,6 +1,6 @@
 package com.group.shopping.domain.item;
 
-import com.group.shopping.domain.item.constant.ItemSellStatus;
+import com.group.shopping.domain.constant.ItemSellStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

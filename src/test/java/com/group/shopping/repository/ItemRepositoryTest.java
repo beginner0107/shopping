@@ -2,7 +2,7 @@ package com.group.shopping.repository;
 
 import com.group.shopping.domain.item.Item;
 import com.group.shopping.domain.item.QItem;
-import com.group.shopping.domain.item.constant.ItemSellStatus;
+import com.group.shopping.domain.constant.ItemSellStatus;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -17,11 +17,8 @@ import org.thymeleaf.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.awt.print.Pageable;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @Profile("test")
 @SpringBootTest

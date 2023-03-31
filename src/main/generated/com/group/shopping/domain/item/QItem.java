@@ -25,7 +25,7 @@ public class QItem extends EntityPathBase<Item> {
 
     public final StringPath itemNm = createString("itemNm");
 
-    public final EnumPath<com.group.shopping.domain.item.constant.ItemSellStatus> itemSellStatus = createEnum("itemSellStatus", com.group.shopping.domain.item.constant.ItemSellStatus.class);
+    public final EnumPath<com.group.shopping.domain.constant.ItemSellStatus> itemSellStatus = createEnum("itemSellStatus", com.group.shopping.domain.constant.ItemSellStatus.class);
 
     public final NumberPath<Integer> price = createNumber("price", Integer.class);
 

@@ -1,5 +1,6 @@
 package com.group.shopping.domain.cart;
 
+import com.group.shopping.domain.BaseEntity;
 import com.group.shopping.domain.member.Member;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Getter
 @ToString
 @NoArgsConstructor
-public class Cart {
+public class Cart extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_id")

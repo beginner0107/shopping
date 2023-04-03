@@ -1,5 +1,6 @@
 package com.group.shopping.domain.member;
 
+import com.group.shopping.domain.BaseEntity;
 import com.group.shopping.domain.constant.Role;
 import com.group.shopping.dto.member.MemberFormDto;
 import lombok.Builder;
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Getter
 @ToString
 @NoArgsConstructor
-public class Member {
+public class Member extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")

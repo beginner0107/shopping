@@ -1,24 +1,20 @@
 package com.group.shopping.domain.item;
 
+import com.group.shopping.domain.BaseEntity;
 import com.group.shopping.domain.constant.ItemSellStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @ToString
 @NoArgsConstructor
 @Entity
 @Table(name = "item")
 @Getter
-@EntityListeners(AuditingEntityListener.class)
-public class Item {
+public class Item extends BaseEntity {
 
     @Id @Column(name = "item_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,30 +36,19 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus; // 상품 판매 상태
 
-    @CreatedDate
-    @Column(nullable = false)
-    private LocalDateTime regTime; // 등록 시간
-
-    @LastModifiedDate
-    @Column(nullable = false)
-    private LocalDateTime updateTime;
-
     @Builder
     public Item(Long id,
                 String itemNm,
                 int price,
                 int stockNumber,
                 String itemDetail,
-                ItemSellStatus itemSellStatus,
-                LocalDateTime regTime,
-                LocalDateTime updateTime) {
+                ItemSellStatus itemSellStatus
+    ) {
         this.id = id;
         this.itemNm = itemNm;
         this.price = price;
         this.stockNumber = stockNumber;
         this.itemDetail = itemDetail;
         this.itemSellStatus = itemSellStatus;
-        this.regTime = regTime;
-        this.updateTime = updateTime;
     }
 }

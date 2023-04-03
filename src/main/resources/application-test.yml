@@ -26,6 +26,16 @@ spring:
     ansi:
       enabled: always
 
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
+
+itemImgLocation: C:/shop/item
+
+uploadPath: file:///C:/shop/
+
+
 logging:
   level:
     '[com.group.shopping]': DEBUG

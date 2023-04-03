@@ -7,7 +7,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:test;MODE=MySQL
+    url: jdbc:h2:file:C:/shop/database/h2db;MODE=MySQL
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -17,7 +17,7 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     properties:
       '[hibernate.default_batch_fetch_size]': 100
       '[hibernate.format_sql]': true
@@ -27,6 +27,15 @@ spring:
       enabled: always
   thymeleaf:
     cache: false
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
+
+itemImgLocation: C:/shop/item
+
+uploadPath: file:///C:/shop/
 
 logging:
   level:

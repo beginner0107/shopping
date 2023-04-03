@@ -30,7 +30,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<OrderItem> orderItems = new ArrayList<>();
 
     @CreatedDate
@@ -40,4 +40,8 @@ public class Order {
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime updateTime;
+
+    public void saveMember(Member member) {
+        this.member = member;
+    }
 }

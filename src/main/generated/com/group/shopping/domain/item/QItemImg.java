@@ -1,4 +1,4 @@
-package com.group.shopping.domain.cart;
+package com.group.shopping.domain.item;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -11,16 +11,16 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QCart is a Querydsl query type for Cart
+ * QItemImg is a Querydsl query type for ItemImg
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QCart extends EntityPathBase<Cart> {
+public class QItemImg extends EntityPathBase<ItemImg> {
 
-    private static final long serialVersionUID = 1558053198L;
+    private static final long serialVersionUID = 832268213L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QCart cart = new QCart("cart");
+    public static final QItemImg itemImg = new QItemImg("itemImg");
 
     public final com.group.shopping.domain.QBaseEntity _super = new com.group.shopping.domain.QBaseEntity(this);
 
@@ -29,36 +29,44 @@ public class QCart extends EntityPathBase<Cart> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final com.group.shopping.domain.member.QMember member;
+    public final StringPath imgName = createString("imgName");
+
+    public final StringPath imgUrl = createString("imgUrl");
+
+    public final QItem item;
 
     //inherited
     public final StringPath modifiedBy = _super.modifiedBy;
 
+    public final StringPath oriImgName = createString("oriImgName");
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> regTime = _super.regTime;
+
+    public final StringPath repimgYn = createString("repimgYn");
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updateTime = _super.updateTime;
 
-    public QCart(String variable) {
-        this(Cart.class, forVariable(variable), INITS);
+    public QItemImg(String variable) {
+        this(ItemImg.class, forVariable(variable), INITS);
     }
 
-    public QCart(Path<? extends Cart> path) {
+    public QItemImg(Path<? extends ItemImg> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QCart(PathMetadata metadata) {
+    public QItemImg(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QCart(PathMetadata metadata, PathInits inits) {
-        this(Cart.class, metadata, inits);
+    public QItemImg(PathMetadata metadata, PathInits inits) {
+        this(ItemImg.class, metadata, inits);
     }
 
-    public QCart(Class<? extends Cart> type, PathMetadata metadata, PathInits inits) {
+    public QItemImg(Class<? extends ItemImg> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.member = inits.isInitialized("member") ? new com.group.shopping.domain.member.QMember(forProperty("member")) : null;
+        this.item = inits.isInitialized("item") ? new QItem(forProperty("item")) : null;
     }
 
 }

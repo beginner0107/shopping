@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers;
@@ -96,9 +95,9 @@ class MemberControllerTest {
                 .andExpect(SecurityMockMvcResultMatchers.unauthenticated());
     }
 
-    public Member createMember(String email, String password) {
+    public void createMember(String email, String password) {
         MemberFormDto memberFormDto = MemberFormDto.of("홍길동", email, password, "서울시 마포구 합정동");
         Member member = Member.createMember(memberFormDto, bCryptPasswordEncoder);
-        return memberService.saveMember(member);
+        memberService.saveMember(member);
     }
 }

@@ -4,11 +4,14 @@ import com.group.shopping.domain.item.Item;
 import com.group.shopping.domain.item.ItemImg;
 import com.group.shopping.dto.item.ItemFormDto;
 import com.group.shopping.dto.item.ItemImgDto;
+import com.group.shopping.dto.item.ItemSearchDto;
 import com.group.shopping.repository.ItemImgRepository;
 import com.group.shopping.repository.ItemRepository;
 import com.group.shopping.service.file.FileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -82,6 +85,11 @@ public class ItemService {
         }
 
         return item.getId();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+        return itemRepository.getAdminItemPage(itemSearchDto, pageable);
     }
 
 }

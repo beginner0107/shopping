@@ -9,7 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
-@EntityListeners(value = AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 @Getter
 public abstract class BaseEntity extends BaseTimeEntity{

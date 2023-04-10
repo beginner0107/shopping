@@ -1,7 +1,6 @@
 package com.group.shopping.config;
 
 import org.springframework.data.domain.AuditorAware;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -15,7 +14,6 @@ public class AuditorAwareImpl implements AuditorAware<String> {
         if (authentication != null) {
             userId = authentication.getName();
         }
-        System.out.println("userID " + userId);
         return Optional.of(userId);
     }
 }

@@ -5,6 +5,7 @@ import com.group.shopping.domain.item.ItemImg;
 import com.group.shopping.dto.item.ItemFormDto;
 import com.group.shopping.dto.item.ItemImgDto;
 import com.group.shopping.dto.item.ItemSearchDto;
+import com.group.shopping.dto.main.MainItemDto;
 import com.group.shopping.repository.ItemImgRepository;
 import com.group.shopping.repository.ItemRepository;
 import com.group.shopping.service.file.FileService;
@@ -90,6 +91,11 @@ public class ItemService {
     @Transactional(readOnly = true)
     public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
         return itemRepository.getAdminItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
 
 }

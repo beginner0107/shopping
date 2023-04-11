@@ -34,4 +34,36 @@ public class Order extends BaseEntity {
     public void saveMember(Member member) {
         this.member = member;
     }
+
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public static Order createOrder(Member member, List<OrderItem> orderItemList) {
+        Order order = new Order();
+        order.saveMember(member);
+        for (OrderItem orderItem : orderItemList) {
+            order.addOrderItem(orderItem);
+        }
+        order.changeOrderStatus(OrderStatus.ORDER);
+        order.saveOrderDate(LocalDateTime.now());
+        return order;
+    }
+
+    private void saveOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    private void changeOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (OrderItem orderItem : orderItems) {
+            totalPrice += orderItem.getTotalPrice();
+        }
+        return totalPrice;
+    }
 }

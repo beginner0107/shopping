@@ -37,4 +37,34 @@ public class OrderItem extends BaseEntity {
         this.orderPrice = orderPrice;
         this.count = count;
     }
+
+    public static OrderItem createOrderItem(Item item, int count) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.saveItem(item);
+        orderItem.saveCount(count);
+        orderItem.saveOrderPrice(item.getPrice());
+
+        item.removeStock(count);
+        return orderItem;
+    }
+
+    private void saveOrderPrice(int price) {
+        this.orderPrice = price;
+    }
+
+    private void saveItem(Item item) {
+        this.item = item;
+    }
+
+    private void saveCount(int count) {
+        this.count = count;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public int getTotalPrice() {
+        return orderPrice * count;
+    }
 }

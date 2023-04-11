@@ -33,4 +33,10 @@ public class Cart extends BaseEntity {
     public Cart(Member member) {
         this.member = member;
     }
+
+    public static Cart createCart(Member member) {
+        Cart cart = new Cart();
+        cart.setMember(member);
+        return cart;
+    }
 }

@@ -7,6 +7,7 @@ import com.group.shopping.domain.item.Item;
 import com.group.shopping.domain.member.Member;
 import com.group.shopping.domain.order.Order;
 import com.group.shopping.domain.order.OrderItem;
+import com.group.shopping.domain.order.OrderStatus;
 import com.group.shopping.dto.order.OrderDto;
 import com.group.shopping.repository.ItemRepository;
 import com.group.shopping.repository.MemberRepository;
@@ -76,5 +77,24 @@ class OrderServiceTest {
         int totalPrice = orderDto.getCount() * item.getPrice();
 
         assertEquals(totalPrice, order.getTotalPrice());
+    }
+
+    @Test
+    @DisplayName("주문 취소 테스트")
+    public void cancelOrder() {
+        Item item = saveItem();
+        Member member = saveMember();
+
+        OrderDto orderDto = new OrderDto();
+        orderDto.setCount(10);
+        orderDto.setItemId(item.getId());
+        Long orderId = orderService.order(orderDto, member.getEmail()) ;
+
+        Order order = orderRepository.findById(orderId)
+                                     .orElseThrow(EntityNotFoundException::new);
+        orderService.cancelOrder(orderId);
+
+        assertEquals(OrderStatus.CANCEL, order.getOrderStatus());
+        assertEquals(100, item.getStockNumber());
     }
 }

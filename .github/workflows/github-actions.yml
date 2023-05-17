@@ -29,22 +29,21 @@ jobs:
     - name: DockerHub Login
       uses: docker/login-action@v2
       with:
-        username: ${{ secrets.DOCKERHUB_USERNAME}}
-        password: ${{ secrets.DOCKERHUB_PASSWORD}}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Docker Image Build
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME}}/${{ secrets.PROJECT_NAME }} .
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }} .
 
     - name: DockerHub Push
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}
 
-    - name: Application Run
-      uses: appleboy/ssh-action@v0.1.6
+    - name: SSH into remote server
+      uses: appleboy/ssh-action@v0.4.0
       with:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_KEY }}
-        # 애플리케이션 실행 스크립트를 여기에 작성해주세요.
         script: |
           sudo docker kill ${{ secrets.PROJECT_NAME }} || true
           sudo docker rm -f ${{ secrets.PROJECT_NAME }} || true

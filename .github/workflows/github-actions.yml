@@ -32,8 +32,8 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build with Gradle
-      run: ./gradlew build -x test --spring.config.additional-location=application-dev.yml
-      
+      run: ./gradlew build -x test
+
     - name: Docker build
       run: |
         docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}

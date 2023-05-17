@@ -39,7 +39,7 @@ jobs:
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}
 
     - name: SSH into remote server
-      uses: appleboy/ssh-action@v0.5.0
+      uses: appleboy/ssh-action@v0.1.4
       with:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USERNAME }}

@@ -25,11 +25,14 @@ jobs:
         echo "SPRING_DATASOURCE_USERNAME=${{ secrets.SPRING_DATASOURCE_USERNAME }}" >> $GITHUB_ENV
         echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.SPRING_DATASOURCE_PASSWORD }}" >> $GITHUB_ENV
 
+    - name: Copy application-dev.yml
+      run: cp config/application-dev.yml application-dev.yml
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
     - name: Build with Gradle
-      run: ./gradlew build -x test
+      run: ./gradlew build -x test --spring.config.additional-location=application-dev.yml
       
     - name: Docker build
       run: |

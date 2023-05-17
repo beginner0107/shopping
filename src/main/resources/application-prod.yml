@@ -7,10 +7,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mariadb://${rds.hostname}:${rds.port}/${rds.db.name}
+    url: ${SPRING_DATASOURCE_URL}
     driver-class-name: org.mariadb.jdbc.Driver
-    username: ${rds.username}
-    password: ${rds.password}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     open-in-view: false
     hibernate:

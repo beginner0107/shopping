@@ -40,3 +40,7 @@ jobs:
         docker build -t spring-cicd .
         docker tag spring-cicd ahnco/spring-cicd:${GITHUB_SHA::7}
         docker push ahnco/spring-cicd:${GITHUB_SHA::7}
+
+    - name: Run Spring Boot application
+      run: |
+        java -jar -Dspring.datasource.url="${SPRING_DATASOURCE_URL}" -Dspring.datasource.username="${SPRING_DATASOURCE_USERNAME}" -Dspring.datasource.password="${SPRING_DATASOURCE_PASSWORD}" build/libs/your-application.jar

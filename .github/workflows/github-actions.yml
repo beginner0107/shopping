@@ -43,4 +43,4 @@ jobs:
 
     - name: Run Spring Boot application
       run: |
-        java -jar -Dspring.datasource.url="${SPRING_DATASOURCE_URL}" -Dspring.datasource.username="${SPRING_DATASOURCE_USERNAME}" -Dspring.datasource.password="${SPRING_DATASOURCE_PASSWORD}" build/libs/your-application.jar
+        java -jar -Dspring.datasource.url="${SPRING_DATASOURCE_URL}" -Dspring.datasource.username="${SPRING_DATASOURCE_USERNAME}" -Dspring.datasource.password="${SPRING_DATASOURCE_PASSWORD}" build/libs/shopping-0.0.1-SNAPSHOT.jar
